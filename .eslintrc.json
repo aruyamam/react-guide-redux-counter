@@ -13,8 +13,5 @@
       "implicit-arrow-linebreak": "off",
       "no-shadow": "off"
    },
-   "extends": [
-      "airbnb"
-   ],
    "plugins": ["react"]
 }
