@@ -8,6 +8,7 @@
    text-align: center;
    font-weight: bold;
    cursor: pointer;
+   user-select: none;
 }
 
 .CounterControl:hover,

@@ -9,55 +9,22 @@ class Coutner extends Component {
       counter: 0
    };
 
-   counterChangeHandler = (action, value) => {
-      switch (action) {
-         case 'inc':
-            this.setState(prevState => ({
-               counter: prevState.counter + 1
-            }));
-            break;
-
-         case 'dec':
-            this.setState(prevState => ({
-               counter: prevState.counter - 1
-            }));
-            break;
-
-         case 'add':
-            this.setState(prevState => ({
-               counter: prevState.counter + value
-            }));
-            break;
-
-         case 'sub':
-            this.setState(prevState => ({
-               counter: prevState.counter - value
-            }));
-            break;
-
-         default:
-      }
-   };
-
    render() {
-      const { ctr, onIncrementCounter } = this.props;
+      const {
+         ctr,
+         onIncrementCounter,
+         onDecrementCounter,
+         onAddCounter,
+         onSubtractCounter
+      } = this.props;
 
       return (
          <div>
             <CounterOutput value={ctr} />
             <CounterControl label="Increment" clicked={onIncrementCounter} />
-            <CounterControl
-               label="Decrement"
-               clicked={() => this.counterChangeHandler('dec')}
-            />
-            <CounterControl
-               label="Add 5"
-               clicked={() => this.counterChangeHandler('add', 5)}
-            />
-            <CounterControl
-               label="Subtract 5"
-               clicked={() => this.counterChangeHandler('sub', 5)}
-            />
+            <CounterControl label="Decrement" clicked={onDecrementCounter} />
+            <CounterControl label="Add 5" clicked={onAddCounter} />
+            <CounterControl label="Subtract 5" clicked={onSubtractCounter} />
          </div>
       );
    }
@@ -68,7 +35,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-   onIncrementCounter: () => dispatch({ type: 'INCREMENT' })
+   onIncrementCounter: () => dispatch({ type: 'INCREMENT' }),
+   onDecrementCounter: () => dispatch({ type: 'DECREMENT' }),
+   onAddCounter: () => dispatch({ type: 'ADD', val: 5 }),
+   onSubtractCounter: () => dispatch({ type: 'SUBTRACT', val: 5 })
 });
 
 export default connect(
