@@ -31,7 +31,7 @@ class Coutner extends Component {
             <CounterControl label="Add 5" clicked={onAddCounter} />
             <CounterControl label="Subtract 5" clicked={onSubtractCounter} />
             <hr />
-            <button onClick={onStoreResult}>Store Result</button>
+            <button onClick={() => onStoreResult(ctr)}>Store Result</button>
             <ul>
                {storeResults.map(strResult => (
                   <li
@@ -50,8 +50,8 @@ class Coutner extends Component {
 }
 
 const mapStateToProps = state => ({
-   ctr: state.counter,
-   storeResults: state.results
+   ctr: state.ctr.counter,
+   storeResults: state.res.results
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -59,7 +59,8 @@ const mapDispatchToProps = dispatch => ({
    onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
    onAddCounter: () => dispatch({ type: actionTypes.ADD, val: 5 }),
    onSubtractCounter: () => dispatch({ type: actionTypes.SUBTRACT, val: 5 }),
-   onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULT }),
+   onStoreResult: result =>
+      dispatch({ type: actionTypes.STORE_RESULT, result }),
    onDeleteResult: id =>
       dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
 });
